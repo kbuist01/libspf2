@@ -60,6 +60,7 @@ enum SPF_domspec_enum {
  *	 SPF_MAX_MECH_LEN + SPF_MAX_STR_LEN
  */
 #define SPF_RECORD_BUFSIZ	  4096
+#define SPF_MAX_NUM_MECH      255
 
 #define ALIGN_DECL(decl) union { double d; long l; decl } __attribute__((aligned(_ALIGN_SZ))) u
 #define ALIGNED_DECL(var) u.var
@@ -852,7 +853,7 @@ ALIGN_DECL(
 
 	len = sizeof( SPF_mech_t );
 
-	if ( spf_record->mech_len + len > SPF_MAX_MECH_LEN )
+	if ( spf_record->num_mech >= SPF_MAX_NUM_MECH )
 		return SPF_E_BIG_MECH;
 
 	data = SPF_mech_data(spf_mechanism);
